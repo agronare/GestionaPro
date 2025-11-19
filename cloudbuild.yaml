@@ -4,7 +4,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/gestionapro:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/gestionapro:$SHORT_SHA'
       - '-t'
       - 'gcr.io/$PROJECT_ID/gestionapro:latest'
       - '.'
@@ -13,12 +13,8 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/$PROJECT_ID/gestionapro:$COMMIT_SHA'
-  
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'push'
-      - 'gcr.io/$PROJECT_ID/gestionapro:latest'
+      - '--all-tags'
+      - 'gcr.io/$PROJECT_ID/gestionapro'
   
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -28,7 +24,7 @@ steps:
       - 'deploy'
       - 'gestionapro'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/gestionapro:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/gestionapro:$SHORT_SHA'
       - '--region'
       - 'europe-west1'
       - '--platform'
@@ -38,7 +34,7 @@ steps:
       - 'NEXT_PUBLIC_FIREBASE_API_KEY=${_NEXT_PUBLIC_FIREBASE_API_KEY},NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${_NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN},NEXT_PUBLIC_FIREBASE_PROJECT_ID=${_NEXT_PUBLIC_FIREBASE_PROJECT_ID},NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${_NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET},NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${_NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID},NEXT_PUBLIC_FIREBASE_APP_ID=${_NEXT_PUBLIC_FIREBASE_APP_ID},FIREBASE_CLIENT_EMAIL=${_FIREBASE_CLIENT_EMAIL},FIREBASE_PRIVATE_KEY=${_FIREBASE_PRIVATE_KEY}'
 
 images:
-  - 'gcr.io/$PROJECT_ID/gestionapro:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/gestionapro:$SHORT_SHA'
   - 'gcr.io/$PROJECT_ID/gestionapro:latest'
 
 options:
