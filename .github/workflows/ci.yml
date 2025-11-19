@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Vercel Deploy
-        if: ${{ secrets.VERCEL_TOKEN != '' }}
+        if: secrets.VERCEL_TOKEN != ''
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
