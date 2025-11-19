@@ -20,6 +20,14 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Set dummy Firebase env vars for build (prevents prerender errors)
+ENV NEXT_PUBLIC_FIREBASE_API_KEY="placeholder-for-build"
+ENV NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="placeholder.firebaseapp.com"
+ENV NEXT_PUBLIC_FIREBASE_PROJECT_ID="placeholder-project"
+ENV NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="placeholder.appspot.com"
+ENV NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="000000000000"
+ENV NEXT_PUBLIC_FIREBASE_APP_ID="1:000000000000:web:placeholder"
+
 RUN npm run build
 
 # Production image, copy all the files and run next
