@@ -1,0 +1,1291 @@
+{
+  "entities": {
+    "Employee": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Employee",
+      "type": "object",
+      "description": "Represents an employee within the company.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the employee, typically the employee number."
+        },
+        "name": {
+          "type": "string",
+          "description": "The full name of the employee."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the employee.",
+          "format": "email"
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the employee within the company's system (e.g., Admin, Manager, Employee).",
+          "enum": [
+            "Admin",
+            "Manager",
+            "Employee"
+          ]
+        },
+        "avatarUrl": {
+          "type": "string",
+          "description": "URL for the employee's profile picture."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current employment status.",
+          "enum": [
+            "Active",
+            "Inactive"
+          ]
+        },
+        "joinDate": {
+          "type": "string",
+          "description": "The date the employee joined the company.",
+          "format": "date"
+        },
+        "employeeNumber": {
+          "type": "string",
+          "description": "The unique number assigned to the employee."
+        },
+        "position": {
+          "type": "string",
+          "description": "The job title or position of the employee."
+        },
+        "department": {
+          "type": "string",
+          "description": "The department the employee belongs to."
+        },
+        "baseSalary": {
+          "type": "number",
+          "description": "The base monthly salary of the employee."
+        },
+        "assignedBranch": {
+          "type": "string",
+          "description": "The branch where the employee is assigned."
+        },
+        "hasSystemAccess": {
+          "type": "boolean",
+          "description": "Indicates if the employee has a system login account."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "role",
+        "status",
+        "joinDate",
+        "employeeNumber",
+        "position",
+        "department"
+      ]
+    },
+    "FinancialRecord": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "FinancialRecord",
+      "type": "object",
+      "description": "Represents a financial record (income or expense).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the financial record."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date of the financial record.",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of financial record (e.g., income, expense)."
+        },
+        "amount": {
+          "type": "number",
+          "description": "The amount of the financial record."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the financial record."
+        }
+      },
+      "required": [
+        "id",
+        "date",
+        "type",
+        "amount",
+        "description"
+      ]
+    },
+    "Document": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Document",
+      "type": "object",
+      "description": "Represents a company document.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the document."
+        },
+        "name": {
+          "type": "string",
+          "description": "The title of the document."
+        },
+        "uploadDate": {
+          "type": "string",
+          "description": "The date the document was uploaded.",
+          "format": "date-time"
+        },
+        "fileLocation": {
+          "type": "string",
+          "description": "The location of the document file."
+        },
+        "employeeId": {
+          "type": "string",
+          "description": "Reference to Employee. (Relationship: Employee 1:N Document)"
+        },
+        "size": {
+          "type": "string",
+          "description": "The size of the file."
+        },
+        "uploadedBy": {
+          "type": "string",
+          "description": "The name of the employee who uploaded the document."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "uploadDate",
+        "fileLocation",
+        "employeeId"
+      ]
+    },
+    "Invoice": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Invoice",
+      "type": "object",
+      "description": "Represents an invoice.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the invoice."
+        },
+        "invoiceNumber": {
+          "type": "string",
+          "description": "The invoice number."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date of the invoice.",
+          "format": "date-time"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "The due date of the invoice.",
+          "format": "date-time"
+        },
+        "amount": {
+          "type": "number",
+          "description": "The total amount of the invoice."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Reference to Client. (Relationship: Client 1:N Invoice)"
+        }
+      },
+      "required": [
+        "id",
+        "invoiceNumber",
+        "date",
+        "dueDate",
+        "amount",
+        "clientId"
+      ]
+    },
+    "Client": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Client",
+      "type": "object",
+      "description": "Represents a client.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the client."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the client."
+        },
+        "rfc": {
+          "type": "string",
+          "description": "The RFC of the client."
+        },
+        "contact": {
+          "type": "string",
+          "description": "The name of the contact person."
+        },
+        "creditLimit": {
+          "type": "number",
+          "description": "The credit limit for the client."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the client.",
+          "enum": [
+            "Activo",
+            "Inactivo"
+          ]
+        },
+        "createdAt": {
+          "type": "object",
+          "description": "Timestamp of when the client was created.",
+          "properties": {
+            "seconds": { "type": "integer" },
+            "nanoseconds": { "type": "integer" }
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "rfc",
+        "contact",
+        "creditLimit",
+        "status"
+      ]
+    },
+    "Opportunity": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Opportunity",
+      "type": "object",
+      "description": "Represents a sales opportunity in the pipeline.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the opportunity."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the opportunity."
+        },
+        "clientName": {
+          "type": "string",
+          "description": "The name of the associated client."
+        },
+        "value": {
+          "type": "number",
+          "description": "The estimated value of the opportunity."
+        },
+        "stage": {
+          "type": "string",
+          "description": "The current stage of the opportunity in the pipeline.",
+          "enum": [
+            "Prospecto",
+            "Negociación",
+            "Cotización",
+            "Seguimiento",
+            "Cerrada"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "clientName",
+        "value",
+        "stage"
+      ]
+    },
+    "Product": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Product",
+      "type": "object",
+      "description": "Represents a product in the catalog.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "Stock Keeping Unit."
+        },
+        "name": {
+          "type": "string",
+          "description": "Commercial name of the product."
+        },
+        "activeIngredient": {
+          "type": "string",
+          "description": "Main active ingredient."
+        },
+        "category": {
+          "type": "string",
+          "description": "Product category."
+        },
+        "cost": {
+          "type": "number",
+          "description": "Cost of the product."
+        },
+        "salePrice": {
+          "type": "number",
+          "description": "Price for sale."
+        },
+        "satTax": {
+          "type": "string",
+          "description": "SAT tax code."
+        },
+        "bulk": {
+          "type": "boolean",
+          "description": "Is it sold in bulk?"
+        },
+        "purchaseUnit": {
+          "type": "string",
+          "description": "The unit in which the product is purchased."
+        },
+        "bulkUnit": {
+          "type": "string",
+          "description": "The unit for bulk sales."
+        },
+        "conversionFactor": {
+          "type": "number",
+          "description": "The conversion factor between purchase unit and bulk unit."
+        }
+      },
+      "required": [
+        "sku",
+        "name",
+        "activeIngredient",
+        "category",
+        "salePrice"
+      ]
+    },
+    "InventoryItem": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "InventoryItem",
+      "type": "object",
+      "description": "Represents a specific lot of a product in inventory.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the inventory item (e.g., SKU-LOT)."
+        },
+        "productName": {
+          "type": "string",
+          "description": "The name of the product."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The SKU of the product."
+        },
+        "lot": {
+          "type": "string",
+          "description": "The lot number of the product."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "The quantity of this item in stock."
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "The unit price for this lot."
+        },
+        "entryDate": {
+          "type": "string",
+          "description": "The date the item was entered into inventory.",
+          "format": "date"
+        },
+        "branchId": {
+          "type": "string",
+          "description": "The ID of the branch where the inventory is located."
+        }
+      },
+      "required": [
+        "id",
+        "productName",
+        "sku",
+        "lot",
+        "quantity",
+        "unitPrice",
+        "entryDate",
+        "branchId"
+      ]
+    },
+    "Sale": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Sale",
+      "type": "object",
+      "description": "Represents a single sales transaction.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the sale."
+        },
+        "folio": {
+          "type": "string",
+          "description": "The unique folio number for the sale."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The ID of the client who made the purchase."
+        },
+        "clientName": {
+          "type": "string",
+          "description": "The name of the client."
+        },
+        "total": {
+          "type": "number",
+          "description": "The total amount of the sale."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date of the sale.",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the sale.",
+          "enum": [
+            "Pagada",
+            "Pendiente",
+            "Cancelada"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "folio",
+        "clientId",
+        "clientName",
+        "total",
+        "date",
+        "status"
+      ]
+    },
+    "SaleItem": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SaleItem",
+      "type": "object",
+      "description": "Represents a single product item within a sale.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the sale item."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The SKU of the product sold."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the product sold."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "The quantity of the product sold."
+        },
+        "price": {
+          "type": "number",
+          "description": "The unit price of the product at the time of sale."
+        }
+      },
+      "required": [
+        "id",
+        "sku",
+        "name",
+        "quantity",
+        "price"
+      ]
+    },
+    "Supplier": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Supplier",
+      "type": "object",
+      "description": "Represents a supplier or vendor.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the supplier."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The legal name of the supplier company."
+        },
+        "contactName": {
+          "type": "string",
+          "description": "The name of the primary contact person."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The main phone number of the supplier."
+        },
+        "rfc": {
+          "type": "string",
+          "description": "The RFC of the supplier."
+        }
+      },
+      "required": [
+        "id",
+        "companyName",
+        "contactName",
+        "phone",
+        "rfc"
+      ]
+    },
+    "Purchase": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Purchase",
+      "type": "object",
+      "description": "Represents a single purchase transaction from a supplier.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the purchase."
+        },
+        "folio": {
+          "type": "string",
+          "description": "The unique folio number for the purchase."
+        },
+        "supplierId": {
+          "type": "string",
+          "description": "The ID of the supplier."
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "The name of the supplier."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date of the purchase.",
+          "format": "date"
+        },
+        "total": {
+          "type": "number",
+          "description": "The total amount of the purchase."
+        }
+      },
+      "required": [
+        "id",
+        "folio",
+        "supplierId",
+        "supplierName",
+        "date",
+        "total"
+      ]
+    },
+    "Vehicle": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Vehicle",
+      "description": "Represents a vehicle in the logistics fleet.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the vehicle."
+        },
+        "name": {
+          "type": "string",
+          "description": "A descriptive name for the vehicle (e.g., 'Camioneta de Reparto 1')."
+        },
+        "plate": {
+          "type": "string",
+          "description": "The license plate of the vehicle."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of vehicle.",
+          "enum": ["Camioneta", "Tractor", "Camión"]
+        },
+        "status": {
+          "type": "string",
+          "description": "The current operational status of the vehicle.",
+          "enum": ["Disponible", "En Ruta", "Mantenimiento"]
+        },
+        "brand": {
+          "type": "string",
+          "description": "The brand of the vehicle (e.g., Nissan, John Deere)."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the vehicle (e.g., NP300)."
+        },
+        "year": {
+          "type": "number",
+          "description": "The manufacturing year of the vehicle."
+        },
+        "capacity": {
+          "type": "string",
+          "description": "The load capacity of the vehicle (e.g., '1.5 Ton')."
+        },
+        "fuelEfficiency": {
+          "type": "number",
+          "description": "Fuel efficiency in kilometers per liter (km/l)."
+        },
+        "fuelType": {
+          "type": "string",
+          "description": "The type of fuel the vehicle uses.",
+          "enum": ["Diesel", "Gasolina"]
+        }
+      },
+      "required": ["id", "name", "plate", "type", "status"]
+    },
+    "Delivery": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Delivery",
+      "description": "Represents a customer delivery.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the delivery." },
+        "folio": { "type": "string", "description": "The unique folio number for the delivery." },
+        "client": { "type": "string", "description": "The name of the client." },
+        "destination": { "type": "string", "description": "The delivery address or destination." },
+        "deliveryDate": { "type": "string", "description": "The scheduled delivery date.", "format": "date" },
+        "status": { "type": "string", "description": "The status of the delivery.", "enum": ["En Preparación", "En Ruta", "Entregada", "Cancelada"] },
+        "vehicleId": { "type": "string", "description": "The ID of the assigned vehicle." }
+      },
+      "required": ["id", "folio", "client", "destination", "deliveryDate", "status"]
+    },
+    "Pickup": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Pickup",
+      "description": "Represents a field pickup.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the pickup." },
+        "folio": { "type": "string", "description": "The unique folio number for the pickup." },
+        "client": { "type": "string", "description": "The name of the client or origin point." },
+        "origin": { "type": "string", "description": "The pickup address or origin." },
+        "scheduledDate": { "type": "string", "description": "The scheduled pickup date.", "format": "date" },
+        "status": { "type": "string", "description": "The status of the pickup.", "enum": ["Programada", "En Tránsito", "Completada", "Cancelada"] },
+        "vehicleId": { "type": "string", "description": "The ID of the assigned vehicle." }
+      },
+      "required": ["id", "folio", "client", "origin", "scheduledDate", "status"]
+    },
+    "FixedAsset": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "FixedAsset",
+      "type": "object",
+      "description": "Represents a fixed asset of the company, such as machinery or vehicles.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the asset."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the asset."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the asset (e.g., maquinaria, equipo, vehiculos).",
+          "enum": ["maquinaria", "equipo", "vehiculos"]
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the asset."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the asset.",
+          "enum": ["activo", "mantenimiento", "baja"]
+        },
+        "acquisitionCost": {
+          "type": "number",
+          "description": "The original cost of acquiring the asset."
+        },
+        "acquisitionDate": {
+          "type": "object",
+          "description": "The date the asset was acquired. Stored as a Firestore Timestamp.",
+          "properties": {
+            "seconds": { "type": "integer" },
+            "nanoseconds": { "type": "integer" }
+          }
+        },
+        "usefulLife": {
+          "type": "number",
+          "description": "The useful life of the asset in years."
+        },
+        "location": {
+          "type": "string",
+          "description": "The branch or location where the asset is."
+        },
+        "monthlyDepreciation": {
+          "type": "number",
+          "description": "The calculated monthly depreciation amount."
+        },
+        "currentValue": {
+          "type": "number",
+          "description": "The current estimated value of the asset after depreciation."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "category",
+        "acquisitionCost",
+        "acquisitionDate",
+        "usefulLife",
+        "location",
+        "status"
+      ]
+    },
+    "Branch": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Branch",
+      "type": "object",
+      "description": "Represents a company branch or office location.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the branch."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the branch."
+        },
+        "address": {
+          "type": "string",
+          "description": "The full street address."
+        },
+        "city": {
+          "type": "string",
+          "description": "The city where the branch is located."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state or province."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal code."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The main phone number for the branch."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "address",
+        "city",
+        "state",
+        "postalCode"
+      ]
+    },
+    "QuotationProduct": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "QuotationProduct",
+      "type": "object",
+      "description": "Represents a single product within a quotation.",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Reference to the Product ID."
+        },
+        "price": {
+          "type": "number",
+          "description": "The quoted price for the product."
+        }
+      },
+      "required": ["productId", "price"]
+    },
+    "Quotation": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Quotation",
+      "type": "object",
+      "description": "Represents a quotation from a supplier.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the quotation."
+        },
+        "quotationNumber": {
+          "type": "string",
+          "description": "The unique number for the quotation."
+        },
+        "supplierId": {
+          "type": "string",
+          "description": "The ID of the supplier providing the quote."
+        },
+        "date": {
+          "type": "object",
+          "description": "The date the quotation was issued. Stored as a Firestore Timestamp.",
+          "properties": {
+            "seconds": { "type": "integer" },
+            "nanoseconds": { "type": "integer" }
+          }
+        },
+        "total": {
+          "type": "number",
+          "description": "The total amount of the quotation."
+        },
+        "agriculturalCampaign": {
+          "type": "string",
+          "description": "The agricultural campaign this quotation is for."
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/backend/entities/QuotationProduct"
+          }
+        }
+      },
+      "required": ["id", "quotationNumber", "supplierId", "date", "total", "products"]
+    },
+     "Notification": {
+      "title": "Notification",
+      "type": "object",
+      "description": "Represents a user notification within the system.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the notification."
+        },
+        "title": {
+          "type": "string",
+          "description": "The main title of the notification."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief summary of the notification content."
+        },
+        "createdAt": {
+          "type": "object",
+          "description": "Timestamp of when the notification was created.",
+          "properties": {
+            "seconds": { "type": "integer" },
+            "nanoseconds": { "type": "integer" }
+          }
+        },
+        "isRead": {
+          "type": "boolean",
+          "description": "Flag indicating if the user has read the notification."
+        },
+        "link": {
+          "type": "string",
+          "description": "A URL to navigate to when the notification is clicked."
+        },
+        "iconName": {
+            "type": "string",
+            "description": "The name of the lucide-react icon to display."
+        }
+      },
+      "required": ["id", "title", "description", "createdAt", "isRead", "link"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "type": "object",
+      "description": "Represents a payment record, either from a client or to a supplier.",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "amount": { "type": "number" },
+        "notes": { "type": "string" },
+        "type": { "type": "string", "enum": ["client", "supplier"] },
+        "clientId": { "type": "string" },
+        "client": { "type": "string" },
+        "saleId": { "type": "string" },
+        "supplierId": { "type": "string" },
+        "supplier": { "type": "string" },
+        "purchaseId": { "type": "string" }
+      },
+      "required": ["id", "date", "amount", "type"]
+    },
+    "Maintenance": {
+      "title": "Maintenance",
+      "type": "object",
+      "description": "Represents a scheduled maintenance for an asset.",
+      "properties": {
+        "id": { "type": "string" },
+        "asset": { "type": "string" },
+        "type": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "technician": { "type": "string" },
+        "cost": { "type": "number" },
+        "status": { "type": "string", "enum": ["Programado", "En Progreso", "Completado"] }
+      },
+      "required": ["id", "asset", "type", "date", "technician", "cost", "status"]
+    },
+    "PayrollRun": {
+      "title": "PayrollRun",
+      "type": "object",
+      "description": "Represents a payroll run for a specific period.",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["Semanal", "Quincenal", "Mensual"] },
+        "period": { "type": "string" },
+        "startDate": { "type": "string", "format": "date" },
+        "endDate": { "type": "string", "format": "date" },
+        "paymentDate": { "type": "string", "format": "date" },
+        "employeeCount": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["En Borrador", "Pagada", "Cancelada"] }
+      },
+      "required": ["id", "type", "period", "startDate", "endDate", "paymentDate", "employeeCount", "totalAmount", "status"]
+    },
+    "LogisticsExpense": {
+      "title": "Logistics Expense",
+      "type": "object",
+      "description": "Represents an expense related to a logistics operation.",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the expense." },
+        "date": { "type": "string", "format": "date", "description": "Date of the expense." },
+        "concept": { "type": "string", "description": "Concept of the expense (e.g., Combustible, Casetas, Viáticos).", "enum": ["Combustible", "Casetas", "Viáticos", "Mantenimiento Menor", "Otro"] },
+        "amount": { "type": "number", "description": "Amount of the expense." },
+        "vehicleId": { "type": "string", "description": "ID of the vehicle associated with the expense." },
+        "tripId": { "type": "string", "description": "ID of the related delivery or pickup trip." },
+        "tripType": { "type": "string", "description": "Type of trip (delivery or pickup).", "enum": ["delivery", "pickup"] },
+        "notes": { "type": "string", "description": "Additional notes about the expense." }
+      },
+      "required": ["id", "date", "concept", "amount", "vehicleId", "tripId", "tripType"]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/employees/{employeeId}",
+        "definition": {
+          "entityName": "Employee",
+          "schema": {
+            "$ref": "#/backend/entities/Employee"
+          },
+          "description": "Stores employee profiles. Path-based ownership ensures only the authenticated user can access their own profile.",
+          "params": [
+            {
+              "name": "employeeId",
+              "description": "The unique identifier for the employee."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/financial_records/{financialRecordId}",
+        "definition": {
+          "entityName": "FinancialRecord",
+          "schema": {
+            "$ref": "#/backend/entities/FinancialRecord"
+          },
+          "description": "Stores financial records. All records share the same access needs.",
+          "params": [
+            {
+              "name": "financialRecordId",
+              "description": "The unique identifier for the financial record."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/documents/{documentId}",
+        "definition": {
+          "entityName": "Document",
+          "schema": {
+            "$ref": "#/backend/entities/Document"
+          },
+          "description": "Stores company documents. Authorization is based on employeeId.",
+          "params": [
+            {
+              "name": "documentId",
+              "description": "The unique identifier for the document."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/clients/{clientId}",
+        "definition": {
+          "entityName": "Client",
+          "schema": {
+            "$ref": "#/backend/entities/Client"
+          },
+          "description": "Stores client information.",
+          "params": [
+            {
+              "name": "clientId",
+              "description": "The unique identifier for the client."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/clients/{clientId}/invoices/{invoiceId}",
+        "definition": {
+          "entityName": "Invoice",
+          "schema": {
+            "$ref": "#/backend/entities/Invoice"
+          },
+          "description": "Stores invoices associated with clients. Path-based ownership ensures that only authorized users can access or modify invoices related to specific clients.",
+          "params": [
+            {
+              "name": "clientId",
+              "description": "The unique identifier for the client."
+            },
+            {
+              "name": "invoiceId",
+              "description": "The unique identifier for the invoice."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/opportunities/{opportunityId}",
+        "definition": {
+          "entityName": "Opportunity",
+          "schema": {
+            "$ref": "#/backend/entities/Opportunity"
+          },
+          "description": "Stores sales opportunities for the pipeline.",
+          "params": [
+            {
+              "name": "opportunityId",
+              "description": "The unique identifier for the opportunity."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/products/{productId}",
+        "definition": {
+          "entityName": "Product",
+          "schema": {
+            "$ref": "#/backend/entities/Product"
+          },
+          "description": "Stores the company's product catalog.",
+          "params": [
+            {
+              "name": "productId",
+              "description": "The unique identifier for the product (usually the SKU)."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/inventory/{inventoryItemId}",
+        "definition": {
+          "entityName": "InventoryItem",
+          "schema": {
+            "$ref": "#/backend/entities/InventoryItem"
+          },
+          "description": "Stores inventory items (lots of products).",
+          "params": [
+            {
+              "name": "inventoryItemId",
+              "description": "The unique identifier for the inventory item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/sales/{saleId}",
+        "definition": {
+          "entityName": "Sale",
+          "schema": {
+            "$ref": "#/backend/entities/Sale"
+          },
+          "description": "Stores individual sales transactions.",
+          "params": [
+            {
+              "name": "saleId",
+              "description": "The unique identifier for the sale."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/sales/{saleId}/items/{itemId}",
+        "definition": {
+          "entityName": "SaleItem",
+          "schema": {
+            "$ref": "#/backend/entities/SaleItem"
+          },
+          "description": "Stores the individual product items for a specific sale.",
+          "params": [
+            {
+              "name": "saleId",
+              "description": "The unique identifier for the sale."
+            },
+            {
+              "name": "itemId",
+              "description": "The unique identifier for the sale item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/suppliers/{supplierId}",
+        "definition": {
+          "entityName": "Supplier",
+          "schema": {
+            "$ref": "#/backend/entities/Supplier"
+          },
+          "description": "Stores supplier information.",
+          "params": [
+            {
+              "name": "supplierId",
+              "description": "The unique identifier for the supplier."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/purchases/{purchaseId}",
+        "definition": {
+          "entityName": "Purchase",
+          "schema": {
+            "$ref": "#/backend/entities/Purchase"
+          },
+          "description": "Stores purchase transactions.",
+          "params": [
+            {
+              "name": "purchaseId",
+              "description": "The unique identifier for the purchase."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/vehicles/{vehicleId}",
+        "definition": {
+          "entityName": "Vehicle",
+          "schema": {
+            "$ref": "#/backend/entities/Vehicle"
+          },
+          "description": "Stores the company's vehicle fleet.",
+          "params": [
+            {
+              "name": "vehicleId",
+              "description": "The unique identifier for the vehicle."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/deliveries/{deliveryId}",
+        "definition": {
+          "entityName": "Delivery",
+          "schema": { "$ref": "#/backend/entities/Delivery" },
+          "description": "Stores customer delivery records.",
+          "params": [
+            { "name": "deliveryId", "description": "The unique ID for the delivery." }
+          ]
+        }
+      },
+      {
+        "path": "/pickups/{pickupId}",
+        "definition": {
+          "entityName": "Pickup",
+          "schema": { "$ref": "#/backend/entities/Pickup" },
+          "description": "Stores field pickup records.",
+          "params": [
+            { "name": "pickupId", "description": "The unique ID for the pickup." }
+          ]
+        }
+      },
+      {
+        "path": "/fixed_assets/{assetId}",
+        "definition": {
+          "entityName": "FixedAsset",
+          "schema": {
+            "$ref": "#/backend/entities/FixedAsset"
+          },
+          "description": "Stores the company's fixed assets.",
+          "params": [
+            {
+              "name": "assetId",
+              "description": "The unique identifier for the asset."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/branches/{branchId}",
+        "definition": {
+          "entityName": "Branch",
+          "schema": {
+            "$ref": "#/backend/entities/Branch"
+          },
+          "description": "Stores company branch locations.",
+          "params": [
+            {
+              "name": "branchId",
+              "description": "The unique identifier for the branch."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/quotations/{quotationId}",
+        "definition": {
+          "entityName": "Quotation",
+          "schema": { "$ref": "#/backend/entities/Quotation" },
+          "description": "Stores supplier quotations.",
+          "params": [
+            { "name": "quotationId", "description": "The unique ID for the quotation." }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/notifications/{notificationId}",
+        "definition": {
+          "entityName": "Notification",
+          "schema": { "$ref": "#/backend/entities/Notification" },
+          "description": "Stores user-specific notifications.",
+          "params": [
+             { "name": "userId", "description": "The ID of the user." },
+            { "name": "notificationId", "description": "The unique ID for the notification." }
+          ]
+        }
+      },
+      {
+        "path": "/payments/{paymentId}",
+        "definition": {
+          "entityName": "Payment",
+          "schema": { "$ref": "#/backend/entities/Payment" },
+          "description": "Stores all payment records, both from clients and to suppliers.",
+          "params": [
+            { "name": "paymentId", "description": "The unique ID for the payment." }
+          ]
+        }
+      },
+      {
+        "path": "/maintenances/{maintenanceId}",
+        "definition": {
+          "entityName": "Maintenance",
+          "schema": { "$ref": "#/backend/entities/Maintenance" },
+          "description": "Stores records for scheduled and completed maintenance on assets.",
+          "params": [
+            { "name": "maintenanceId", "description": "The unique ID for the maintenance record." }
+          ]
+        }
+      },
+      {
+        "path": "/payrolls/{payrollId}",
+        "definition": {
+          "entityName": "PayrollRun",
+          "schema": { "$ref": "#/backend/entities/PayrollRun" },
+          "description": "Stores payroll run information.",
+          "params": [
+            { "name": "payrollId", "description": "The unique ID for the payroll run." }
+          ]
+        }
+      },
+      {
+        "path": "/logistics_expenses/{expenseId}",
+        "definition": {
+          "entityName": "LogisticsExpense",
+          "schema": { "$ref": "#/backend/entities/LogisticsExpense" },
+          "description": "Stores all expenses related to logistics operations.",
+          "params": [
+            { "name": "expenseId", "description": "The unique ID for the logistics expense." }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to manage employee information, financial records, documents, invoices, and client data for GestionaPro. It prioritizes authorization independence by avoiding hierarchical `get()` calls in security rules.  Authorization is handled through path-based ownership and explicit collections for roles.  Structural segregation ensures each collection has a homogeneous security posture. The design facilitates secure `list` operations and maintains data integrity through consistent naming and explicit state modeling.\n\n*   **/employees/{employeeId}**: Stores employee profiles. Path-based ownership simplifies access control. Read and write access is generally open for authenticated users, which is suitable for an internal management tool but should be reviewed for production.\n*   **/financial_records/{financialRecordId}**: Stores financial records. All records share the same access needs.\n*   **/documents/{documentId}**: Stores company documents. The `employeeId` field links documents to employees, but authorization rules are based on the existence of the employee profile at /employees/{employeeId}. This ensures documents can only be created by valid employees.\n*   **/clients/{clientId}**: Stores client information.\n*   **/clients/{clientId}/invoices/{invoiceId}**: Stores invoices associated with clients. Path-based ownership ensures that only authorized users can access or modify invoices related to specific clients.\n*   **/opportunities/{opportunityId}**: Stores sales opportunities. Open access for authenticated users.\n*   **/products/{productId}**: Stores the product catalog. Open access for authenticated users is suitable for a shared resource like this.\n*   **/inventory/{inventoryItemId}**: Stores individual inventory lots. Open access for authenticated users to manage shared inventory data.\n*   **/sales/{saleId}**: Stores individual sales transactions. Contains a subcollection for items within that sale.\n*   **/suppliers/{supplierId}**: Stores supplier information, with open read/write for authenticated users.\n*   **/purchases/{purchaseId}**: Stores purchase records, with open read/write for authenticated users.\n*   **/vehicles/{vehicleId}**: Stores the vehicle fleet. Open access for authenticated users.\n*   **/deliveries/{deliveryId}**: Stores customer delivery records.\n*   **/pickups/{pickupId}**: Stores field pickup records.\n*   **/fixed_assets/{assetId}**: Stores fixed assets. Open access for authenticated users.\n*   **/branches/{branchId}**: Stores company branch information. Open access for authenticated users.\n*   **/quotations/{quotationId}**: Stores supplier quotations. Open access for authenticated users.\n*   **/payrolls/{payrollId}**: Stores payroll runs. Open access for authenticated users."
+  }
+}
+
+    
